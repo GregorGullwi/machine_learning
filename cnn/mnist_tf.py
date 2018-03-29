@@ -1,10 +1,6 @@
 import tensorflow as tf
 import numpy as np
 
-logging_hook = tf.train.LoggingTensorHook(
-    tensors={"probabilities": "softmax_tensor"},
-    every_n_iter=50)
-
 MNIST_DATA_SIZE = 28
 DEFAULT_MODEL_DIR = "cnn_models"
 LEARNING_RATE = 0.001
@@ -134,6 +130,10 @@ def train():
         batch_size=100,
         num_epochs=None,
         shuffle=True)
+
+    logging_hook = tf.train.LoggingTensorHook(
+        tensors={"probabilities": "softmax_tensor"},
+        every_n_iter=50)
     
     mnist_classifier.train(
         input_fn=train_input_fn,
@@ -168,5 +168,6 @@ def main(args):
         print("verifying model...")
         test()
         print("valid arguments: train or test")
+        
 
 tf.app.run()
