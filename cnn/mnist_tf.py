@@ -161,12 +161,14 @@ def test():
 # Main
 def main(args):
     
-    if args[1] == 'train':
+    num_args = len(args)
+    if num_args > 1 and args[1] == 'train':
         print("training model...")
         train()
-    elif args[1] == 'test':
+    elif num_args > 1 and args[1] == 'test':
         print("verifying model...")
         test()
+    else:
         print("valid arguments: train or test")
         
 
