@@ -158,6 +158,29 @@ def test():
     print(results)
 
 
+# Predict with previously trained model
+def predict():
+    mnist_classifier = tf.estimator.Estimator(
+        model_fn=cnn_model_fn,
+        model_dir=DEFAULT_MODEL_DIR)
+
+    test_data, test_labels = load_mnist(False)
+    predict_input_fn = tf.estimator.inputs.numpy_input_fn(
+        x={"x":test_data},
+        num_epochs=1,
+        shuffle=False)
+
+    predictions = list(mnist_classifier.predict(input_fn=predict_input_fn))
+
+    output = []
+    i = 1
+    for p in predictions:
+        output += [(i, p['classes'])]
+        i += 1
+    #print(output)
+    np.savetxt('test_predictions.csv', output, fmt='%d', delimiter=',', header="ImageId,Label")
+
+
 # Main
 def main(args):
     
@@ -168,6 +191,9 @@ def main(args):
     elif num_args > 1 and args[1] == 'test':
         print("verifying model...")
         test()
+    elif num_args > 1 and args[1] == 'predict':
+        print("predicting with model...")
+        predict()
     else:
         print("valid arguments: train or test")
         
