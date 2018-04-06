@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+cnn/cnn_models
+cnn/fashion_mnist_models
+cnn/MNIST-data
