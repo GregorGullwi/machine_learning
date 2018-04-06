@@ -109,11 +109,11 @@ def load_mnist(is_training):
 
     if (is_training):
         train_data = mnist.train.images # Returns np.array
-        train_labels = np.asarray(mnist.train.labels, dtype=np.int32)
+        train_labels = np.asarray(mnist.train.labels, dtype=np.int8)
         return train_data, train_labels
     
     test_data = mnist.test.images # Returns np.array
-    test_labels = np.asarray(mnist.test.labels, dtype=np.int32)
+    test_labels = np.asarray(mnist.test.labels, dtype=np.int8)
 
     return test_data, test_labels
 
